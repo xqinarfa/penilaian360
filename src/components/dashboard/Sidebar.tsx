@@ -45,7 +45,7 @@ const navSections: NavSection[] = [
     items: [
       { name: "Periode Evaluasi", href: "/periode-evaluasi", icon: Calendar },
       { name: "Penilaian Aktif", href: "#penilaian", icon: CheckSquare, badge: 12 },
-      { name: "Laporan", href: "#laporan", icon: TrendingUp },
+      { name: "Hasil & Laporan", href: "/laporan", icon: TrendingUp },
     ],
   },
   {
@@ -122,13 +122,19 @@ export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
               <div className="dash-nav-section-title">{section.title}</div>
               <ul className="dash-nav-list">
                 {section.items.map((item) => {
-                  const isActive = pathname === item.href;
+                  const isActive =
+                    pathname === item.href ||
+                    (item.href !== "/" &&
+                      item.href !== "#" &&
+                      !item.href.startsWith("#") &&
+                      pathname.startsWith(`${item.href}/`));
                   const Icon = item.icon;
                   return (
                     <li key={item.name}>
                       <Link
                         href={item.href}
                         className={`dash-nav-item ${isActive ? "active" : ""}`}
+                        aria-current={isActive ? "page" : undefined}
                         onClick={onClose}
                       >
                         <Icon size={18} className="dash-nav-icon" aria-hidden="true" />

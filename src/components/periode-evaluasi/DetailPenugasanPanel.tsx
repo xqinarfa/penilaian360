@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { X, AlertCircle, Mail, Phone, Send } from "lucide-react";
 import type { PenilaianTertundaItem } from "@/types";
 
@@ -78,7 +79,12 @@ export default function DetailPenugasanPanel({
           <div className="dash-detail-row">
             <dt className="dash-detail-dt">Menilai</dt>
             <dd className="dash-detail-dd-col">
-              <span className="dash-detail-strong">{item.alumniNama}</span>
+              <Link
+                href="/periode-evaluasi/detail-alumni"
+                className="dash-detail-strong text-blue-600 hover:underline"
+              >
+                {item.alumniNama}
+              </Link>
               <span className="dash-table-nip-mono">
                 {item.alumniNip || "198902152014031002"}
               </span>

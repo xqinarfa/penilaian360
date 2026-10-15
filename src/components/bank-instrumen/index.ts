@@ -7,3 +7,4 @@ export { default as LiveQuestionnaireModal } from "./LiveQuestionnaireModal";
 export { default as AddEditButirModal } from "./AddEditButirModal";
 export { default as AddFokusModal } from "./AddFokusModal";
 export { default as AddSubdimensiModal } from "./AddSubdimensiModal";
+export * from "./tambah-butir";

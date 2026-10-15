@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { Plus } from "lucide-react";
 import { Sidebar, Topbar } from "@/components/dashboard";
 import {
   JenisPelatihanSidebar,
@@ -145,6 +147,25 @@ export default function BankInstrumenPage() {
               <p className="dash-page-subtitle">
                 Kelola fokus, subdimensi, indikator, dan butir pertanyaan per jenis pelatihan.
               </p>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <Link
+                href="/bank-instrumen/tambah-butir"
+                className="dash-btn-action-primary"
+                style={{
+                  textDecoration: "none",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  padding: "8px 16px",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  borderRadius: "8px",
+                }}
+              >
+                <Plus size={15} />
+                <span>Tambah Butir Pertanyaan</span>
+              </Link>
             </div>
           </div>
 

@@ -1,0 +1,838 @@
+/* ==========================================================================
+   HASIL & LAPORAN - SCOPED STYLES (Vanilla CSS)
+   ========================================================================== */
+
+/* Main Page Container */
+.hl-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Base Card */
+.hl-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(11, 46, 89, 0.04), 0 1px 3px rgba(11, 46, 89, 0.06);
+}
+
+/* Header Section */
+.hl-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+@media (min-width: 640px) {
+  .hl-header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.hl-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #0b2e59;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+@media (min-width: 1024px) {
+  .hl-title {
+    font-size: 28px;
+  }
+}
+
+.hl-subtitle {
+  font-size: 13.5px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.hl-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.hl-btn-export-outline {
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(11, 46, 89, 0.03);
+}
+
+.hl-btn-export-outline:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  color: #0b2e59;
+}
+
+.hl-btn-export-primary {
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 8px;
+  background: #1f6fd1;
+  border: 1px solid transparent;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(31, 111, 209, 0.2);
+}
+
+.hl-btn-export-primary:hover {
+  background: #155bbb;
+}
+
+/* ==========================================================================
+   TABS BAR
+   ========================================================================== */
+.hl-tabs-bar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.hl-tab-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.hl-tab-btn:hover {
+  color: #0b2e59;
+}
+
+.hl-tab-btn.active {
+  color: #155bbb;
+}
+
+.hl-tab-indicator {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: #1f6fd1;
+  border-radius: 2px 2px 0 0;
+}
+
+/* ==========================================================================
+   STAT CARDS
+   ========================================================================== */
+.hl-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .hl-stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .hl-stat-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.hl-stat-card {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.hl-stat-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hl-stat-label {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #64748b;
+  margin: 0;
+}
+
+.hl-stat-icon-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: #e8f1fc;
+  color: #1f6fd1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hl-stat-main-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.hl-stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #0b2e59;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+}
+
+.hl-stat-unit {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0b2e59;
+  line-height: 1;
+}
+
+.hl-stat-badge-rating {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: #ecfdf5;
+  color: #047857;
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+.hl-stat-footer {
+  font-size: 11.5px;
+  color: #64748b;
+  margin-top: 8px;
+}
+
+.hl-stat-footer strong {
+  font-weight: 600;
+  color: #334155;
+}
+
+.hl-stat-trend-up {
+  font-weight: 600;
+  color: #059669;
+}
+
+/* ==========================================================================
+   FILTER BARS
+   ========================================================================== */
+.hl-filter-card {
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.hl-filter-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+@media (min-width: 640px) {
+  .hl-filter-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.hl-filter-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+@media (min-width: 640px) {
+  .hl-filter-grid-2 {
+    grid-template-columns: minmax(0, 1fr) 240px;
+  }
+}
+
+.hl-select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.hl-select-field {
+  appearance: none;
+  width: 100%;
+  height: 40px;
+  padding-left: 14px;
+  padding-right: 36px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  font-size: 13px;
+  font-weight: 500;
+  color: #334155;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hl-select-field:focus {
+  border-color: #1f6fd1;
+  box-shadow: 0 0 0 4px rgba(31, 111, 209, 0.1);
+}
+
+.hl-select-chevron {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.hl-search-field-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.hl-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.hl-search-input {
+  width: 100%;
+  height: 40px;
+  padding-left: 40px;
+  padding-right: 12px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  border: 1px solid transparent;
+  font-size: 13px;
+  color: #1e293b;
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.hl-search-input:focus {
+  background: #ffffff;
+  border-color: #1f6fd1;
+  box-shadow: 0 0 0 4px rgba(31, 111, 209, 0.1);
+}
+
+/* ==========================================================================
+   BAR CHART (Fokus Evaluasi)
+   ========================================================================== */
+.hl-chart-hambatan-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 1280px) {
+  .hl-chart-hambatan-grid {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  }
+}
+
+.hl-chart-card {
+  padding: 24px;
+}
+
+.hl-chart-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.hl-section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0b2e59;
+  margin: 0;
+}
+
+.hl-section-subtitle {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.hl-legend-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  font-size: 11.5px;
+  color: #475569;
+}
+
+.hl-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.bar-chart-grid {
+  position: relative;
+  padding-left: 44px;
+}
+
+.bar-chart-grid::before {
+  content: "";
+  position: absolute;
+  left: 44px;
+  right: 0;
+  top: 0;
+  bottom: 40px;
+  background:
+    linear-gradient(to top, transparent 24.5%, #f1f5f9 24.5%, #f1f5f9 25%, transparent 25%),
+    linear-gradient(to top, transparent 49.5%, #f1f5f9 49.5%, #f1f5f9 50%, transparent 50%),
+    linear-gradient(to top, transparent 74.5%, #f1f5f9 74.5%, #f1f5f9 75%, transparent 75%),
+    linear-gradient(to top, transparent 99.5%, #e2e8f0 99.5%, #e2e8f0 100%, transparent 100%);
+  pointer-events: none;
+}
+
+.y-axis {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 40px;
+  width: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 10.5px;
+  color: #94a3b8;
+  text-align: right;
+  padding-right: 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+.hl-bars-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  height: 220px;
+  padding-bottom: 40px;
+  position: relative;
+}
+
+.bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.bar-group .bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  height: 180px;
+  width: 100%;
+}
+
+.bar-group .bar {
+  width: 14px;
+  border-radius: 4px 4px 0 0;
+  transition: opacity 0.15s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.bar-group .bar:hover {
+  opacity: 0.82;
+  transform: scaleY(1.02);
+}
+
+.bar-group .bar-label {
+  font-size: 10.5px;
+  color: #64748b;
+  text-align: center;
+  line-height: 1.25;
+  max-width: 80px;
+  margin: 0;
+  word-break: normal;
+}
+
+.hl-chart-footer {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11.5px;
+  color: #64748b;
+}
+
+.hl-chart-detail-link {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1f6fd1;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.15s ease;
+}
+
+.hl-chart-detail-link:hover {
+  color: #155bbb;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   HAMBATAN TERBANYAK
+   ========================================================================== */
+.hl-hambatan-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.hl-hambatan-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.hl-hambatan-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.hambatan-row {
+  display: grid;
+  grid-template-columns: 1fr 50px;
+  gap: 12px;
+  align-items: center;
+}
+
+.hambatan-row .hambatan-text {
+  font-size: 12.5px;
+  color: #334155;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.hambatan-row .progress-track {
+  height: 6px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  overflow: hidden;
+  margin-top: 6px;
+}
+
+.hambatan-row .progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: #1f6fd1;
+  transition: width 0.4s ease;
+}
+
+.hambatan-row .hambatan-val {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e293b;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.hl-hambatan-footer {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+  font-size: 11.5px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   HEATMAP TABLE (Peta Indeks per Unit Kerja)
+   ========================================================================== */
+.hl-heatmap-card {
+  padding: 24px;
+}
+
+.hl-heatmap-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.hl-heatmap-legend {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  color: #64748b;
+  flex-wrap: wrap;
+}
+
+.hl-heatmap-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hl-legend-color-box {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+}
+
+.heat-cell {
+  padding: 8px 10px;
+  text-align: center;
+  font-size: 12.5px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  border-radius: 6px;
+  margin: 2px auto;
+  max-width: 58px;
+  line-height: 1.2;
+}
+
+.hl-privacy-notice-box {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 11.5px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   TAB 2: HASIL INDIVIDU TABLE
+   ========================================================================== */
+.hl-info-callout {
+  border-radius: 12px;
+  background: rgba(232, 241, 252, 0.6);
+  border: 1px solid rgba(31, 111, 209, 0.12);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.hl-info-callout p {
+  font-size: 12.5px;
+  color: #155bbb;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.hl-table-card {
+  overflow: hidden;
+}
+
+.hl-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.hl-data-table thead tr {
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.hl-data-table th {
+  padding: 12px 16px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.hl-data-table th.col-center {
+  text-align: center;
+}
+
+.hl-data-table tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+  transition: background-color 0.12s ease;
+  cursor: pointer;
+}
+
+.hl-data-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.hl-data-table td {
+  padding: 14px 16px;
+  font-size: 13px;
+  color: #334155;
+  vertical-align: middle;
+}
+
+.hl-data-table td.col-center {
+  text-align: center;
+}
+
+.hl-alumni-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.hl-alumni-nip {
+  font-size: 11.5px;
+  color: #64748b;
+  font-family: var(--font-mono, monospace);
+  font-variant-numeric: tabular-nums;
+  margin: 2px 0 0;
+}
+
+.hl-alumni-jabatan {
+  font-size: 11.5px;
+  color: #94a3b8;
+  margin: 2px 0 0;
+}
+
+.hl-index-number {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0b2e59;
+  font-variant-numeric: tabular-nums;
+}
+
+.hl-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  font-size: 10.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.hl-status-pill.selesai {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.hl-status-pill.sebagian {
+  background: #fffbeb;
+  color: #92400e;
+}
+
+.hl-table-pagination {
+  padding: 14px 20px;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hl-pagination-info {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0;
+}
+
+.hl-pagination-info strong {
+  color: #1e293b;
+}
+
+.hl-pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hl-btn-page {
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.hl-btn-page:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+
+.hl-btn-page:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: #e2e8f0;
+  color: #94a3b8;
+}

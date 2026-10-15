@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { MoreHorizontal, Clock, CheckCircle2 } from "lucide-react";
 import type { PeriodeEvaluasiItem } from "@/types";
@@ -120,7 +121,12 @@ export default function PeriodeTable() {
                 <tr key={row.id}>
                   <td>
                     <div className="dash-periode-name-cell">
-                      <p className="dash-periode-title">{row.nama}</p>
+                      <Link
+                        href="/periode-evaluasi/detail-alumni"
+                        className="dash-periode-title hover:text-blue-600 transition"
+                      >
+                        {row.nama}
+                      </Link>
                       <p className="dash-periode-meta">Dibuat otomatis · {row.createdAt}</p>
                     </div>
                   </td>
