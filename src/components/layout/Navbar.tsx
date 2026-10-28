@@ -35,42 +35,47 @@ export default function Navbar() {
       }
     }
 
+    let rafId: number | null = null;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      if (rafId !== null) return;
+      rafId = window.requestAnimationFrame(() => {
+        rafId = null;
+        setScrolled(window.scrollY > 20);
 
-      // Avoid overriding active state during programmatic smooth scrolling
-      if (isClickScrollingRef.current) return;
+        // Avoid overriding active state during programmatic smooth scrolling
+        if (isClickScrollingRef.current) return;
 
-      // Bottom of page detection (highlights last section 'panduan')
-      const isAtBottom =
-        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
-      if (isAtBottom) {
-        setActiveSection("panduan");
-        return;
-      }
-
-      // Detection threshold line at 38% of viewport height (natural reading eye level)
-      const detectionLine = window.scrollY + Math.min(320, window.innerHeight * 0.38);
-
-      const sectionPositions = navItems
-        .map((item) => {
-          const el = document.getElementById(item.id);
-          if (!el) return null;
-          const top = el.getBoundingClientRect().top + window.scrollY;
-          return { id: item.id, top };
-        })
-        .filter((item): item is { id: string; top: number } => item !== null);
-
-      for (let i = sectionPositions.length - 1; i >= 0; i--) {
-        const { id, top } = sectionPositions[i];
-        if (detectionLine >= top) {
-          setActiveSection(id);
+        // Bottom of page detection (highlights last section 'panduan')
+        const isAtBottom =
+          window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100;
+        if (isAtBottom) {
+          setActiveSection("panduan");
           return;
         }
-      }
 
-      // Above all sections (in Hero area) -> no nav item active
-      setActiveSection(null);
+        // Detection threshold line at 38% of viewport height (natural reading eye level)
+        const detectionLine = window.scrollY + Math.min(320, window.innerHeight * 0.38);
+
+        const sectionPositions = navItems
+          .map((item) => {
+            const el = document.getElementById(item.id);
+            if (!el) return null;
+            const top = el.getBoundingClientRect().top + window.scrollY;
+            return { id: item.id, top };
+          })
+          .filter((item): item is { id: string; top: number } => item !== null);
+
+        for (let i = sectionPositions.length - 1; i >= 0; i--) {
+          const { id, top } = sectionPositions[i];
+          if (detectionLine >= top) {
+            setActiveSection(id);
+            return;
+          }
+        }
+
+        // Above all sections (in Hero area) -> no nav item active
+        setActiveSection(null);
+      });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -78,6 +83,7 @@ export default function Navbar() {
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      if (rafId !== null) window.cancelAnimationFrame(rafId);
       if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
     };
   }, []);
@@ -130,18 +136,14 @@ export default function Navbar() {
           aria-label="Beranda Penilaian 360"
         >
           <motion.img
-            src="/kemenhub-emblem.svg"
-            alt="Lambang Kementerian Perhubungan"
-            className="emblem-img"
-            width={40}
-            height={40}
-            whileHover={{ rotate: 5, scale: 1.05 }}
+            src="/kemenhub-corpu.png"
+            alt="Logo Kemenhub Corporate University"
+            className="brand-logo-img"
+            width={134}
+            height={48}
+            whileHover={{ scale: 1.04 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
           />
-          <div className="brand-titles">
-            <span className="brand-title-main">Kementerian Perhubungan</span>
-            <span className="brand-title-sub">Republik Indonesia</span>
-          </div>
           <div className="brand-divider" aria-hidden="true" />
           <div className="subbrand-section">
             <span className="subbrand-title">Penilaian 360</span>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useDeferredValue } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, ChevronDown, Check } from "lucide-react";
 import {
@@ -17,6 +17,7 @@ const availableYears = ["2026", "2025", "2024"];
 
 export default function DashboardPage() {
   const [searchTerm, setSearchTerm] = useState("");
+  const deferredSearchTerm = useDeferredValue(searchTerm);
   const [selectedYear, setSelectedYear] = useState("2026");
   const [isYearDropdownOpen, setIsYearDropdownOpen] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
@@ -123,7 +124,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Section: Tabel Alumni Memasuki Masa Evaluasi */}
-          <AlumniEvaluationTable searchTerm={searchTerm} />
+          <AlumniEvaluationTable searchTerm={deferredSearchTerm} />
 
           {/* Footer Note */}
           <footer className="dash-footer-note">

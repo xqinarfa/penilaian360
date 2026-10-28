@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { CheckCircle2, AlertCircle, ChevronRight, ArrowRight } from "lucide-react";
 import type { AlumniEvaluationItem } from "@/types";
 import { allAlumniDataset } from "@/lib/mock-alumni";
-import AlumniDetailModal from "./AlumniDetailModal";
-import ScheduleModal from "./ScheduleModal";
+
+const AlumniDetailModal = dynamic(() => import("./AlumniDetailModal"), { ssr: false });
+const ScheduleModal = dynamic(() => import("./ScheduleModal"), { ssr: false });
 
 interface AlumniTableProps {
   searchTerm?: string;
@@ -18,15 +20,21 @@ export default function AlumniEvaluationTable({ searchTerm = "" }: AlumniTablePr
   const [isScheduleOpen, setIsScheduleOpen] = useState(false);
   const pageSize = 4;
 
-  const filteredData = allAlumniDataset.filter(
-    (item) =>
-      item.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.nip.includes(searchTerm) ||
-      item.pelatihan.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredData = useMemo(() => {
+    if (!searchTerm.trim()) return allAlumniDataset;
+    const lower = searchTerm.toLowerCase();
+    return allAlumniDataset.filter(
+      (item) =>
+        item.nama.toLowerCase().includes(lower) ||
+        item.nip.includes(searchTerm) ||
+        item.pelatihan.toLowerCase().includes(lower)
+    );
+  }, [searchTerm]);
 
   const totalPages = Math.ceil(filteredData.length / pageSize) || 1;
-  const paginatedData = filteredData.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+  const paginatedData = useMemo(() => {
+    return filteredData.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+  }, [filteredData, currentPage, pageSize]);
 
   return (
     <>
@@ -66,13 +74,28 @@ export default function AlumniEvaluationTable({ searchTerm = "" }: AlumniTablePr
               </tr>
             </thead>
             <tbody>
-              {paginatedData.map((row) => (
-                <tr
-                  key={row.id}
-                  className="dash-table-clickable-row"
-                  onClick={() => setSelectedAlumni(row)}
-                  title={`Klik untuk melihat detail evaluasi 360 ${row.nama}`}
-                >
+              {paginatedData.length === 0 ? (
+                <tr>
+                  <td colSpan={7} style={{ textAlign: "center", padding: "40px 24px", color: "#64748b" }}>
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                      <AlertCircle size={24} color="#94a3b8" />
+                      <span style={{ fontWeight: 600, color: "#334155", fontSize: "13.5px" }}>
+                        Tidak ada data alumni yang cocok
+                      </span>
+                      <span style={{ fontSize: "12px", color: "#64748b" }}>
+                        Coba gunakan kata kunci pencarian NIP, nama pegawai, atau program pelatihan lain.
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              ) : (
+                paginatedData.map((row) => (
+                  <tr
+                    key={row.id}
+                    className="dash-table-clickable-row"
+                    onClick={() => setSelectedAlumni(row)}
+                    title={`Klik untuk melihat detail evaluasi 360 ${row.nama}`}
+                  >
                   <td>
                     <div className="dash-cell-employee">
                       <span className="dash-emp-name">{row.nama}</span>
@@ -127,7 +150,7 @@ export default function AlumniEvaluationTable({ searchTerm = "" }: AlumniTablePr
                     <ChevronRight size={16} className="dash-row-chevron" aria-hidden="true" />
                   </td>
                 </tr>
-              ))}
+              )))}
             </tbody>
           </table>
         </div>
@@ -162,16 +185,20 @@ export default function AlumniEvaluationTable({ searchTerm = "" }: AlumniTablePr
       </section>
 
       {/* Detail Modal */}
-      <AlumniDetailModal
-        alumni={selectedAlumni}
-        onClose={() => setSelectedAlumni(null)}
-      />
+      {selectedAlumni && (
+        <AlumniDetailModal
+          alumni={selectedAlumni}
+          onClose={() => setSelectedAlumni(null)}
+        />
+      )}
 
       {/* Schedule Modal */}
-      <ScheduleModal
-        isOpen={isScheduleOpen}
-        onClose={() => setIsScheduleOpen(false)}
-      />
+      {isScheduleOpen && (
+        <ScheduleModal
+          isOpen={isScheduleOpen}
+          onClose={() => setIsScheduleOpen(false)}
+        />
+      )}
     </>
   );
 }

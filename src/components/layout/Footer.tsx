@@ -1,7 +1,5 @@
-"use client";
-
 import Link from "next/link";
-import { motion } from "framer-motion";
+import Image from "next/image";
 import { MapPin, Phone, Mail, Globe, MessageCircle, Camera, PlayCircle } from "lucide-react";
 
 export default function Footer() {
@@ -18,27 +16,32 @@ export default function Footer() {
                 className="footer-logo-img"
                 width={41}
                 height={48}
+                loading="lazy"
+                decoding="async"
               />
-              <img
+              <Image
                 src="/bpsdmp.png"
                 alt="Logo BPSDMP"
                 className="footer-logo-img"
                 width={51}
                 height={48}
+                loading="lazy"
               />
-              <img
+              <Image
                 src="/ppsdmap.png"
                 alt="Logo PPSDMAP"
                 className="footer-logo-img"
                 width={48}
                 height={48}
+                loading="lazy"
               />
-              <img
+              <Image
                 src="/corpus.png"
                 alt="Logo Corpus"
                 className="footer-logo-img"
                 width={41}
                 height={48}
+                loading="lazy"
               />
             </div>
 
@@ -119,50 +122,42 @@ export default function Footer() {
               <h4 className="footer-heading">Ikuti Kami</h4>
             </div>
             <div className="footer-social-row">
-              <motion.a
+              <a
                 href="https://dephub.go.id"
                 target="_blank"
                 rel="noreferrer"
                 className="footer-social-btn"
                 aria-label="Website Resmi Kemenhub"
-                whileHover={{ scale: 1.08, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
-                whileTap={{ scale: 0.95 }}
               >
                 <Globe size={20} />
-              </motion.a>
-              <motion.a
+              </a>
+              <a
                 href="https://dephub.go.id/kontak"
                 target="_blank"
                 rel="noreferrer"
                 className="footer-social-btn"
                 aria-label="Kontak Kemenhub"
-                whileHover={{ scale: 1.08, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
-                whileTap={{ scale: 0.95 }}
               >
                 <MessageCircle size={20} />
-              </motion.a>
-              <motion.a
+              </a>
+              <a
                 href="https://instagram.com/kemenhub151"
                 target="_blank"
                 rel="noreferrer"
                 className="footer-social-btn"
                 aria-label="Instagram Kemenhub"
-                whileHover={{ scale: 1.08, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
-                whileTap={{ scale: 0.95 }}
               >
                 <Camera size={20} />
-              </motion.a>
-              <motion.a
+              </a>
+              <a
                 href="https://youtube.com/@kemenhub151"
                 target="_blank"
                 rel="noreferrer"
                 className="footer-social-btn"
                 aria-label="YouTube Kemenhub"
-                whileHover={{ scale: 1.08, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
-                whileTap={{ scale: 0.95 }}
               >
                 <PlayCircle size={20} />
-              </motion.a>
+              </a>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { easeExpo } from "@/lib/animations";
 
@@ -15,9 +16,12 @@ export default function CtaBannerSection() {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, ease: easeExpo }}
         >
-          <img
+          <Image
             src="/cta-bg.png"
             alt="Aparatur Sipil Negara tersenyum memegang tablet"
+            fill
+            sizes="(max-width: 1200px) 100vw, 1200px"
+            quality={80}
             className="cta-bg-img"
           />
           <div className="cta-gradient-overlay" aria-hidden="true" />

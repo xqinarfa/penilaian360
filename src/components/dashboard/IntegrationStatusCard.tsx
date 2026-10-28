@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, AlertTriangle, ArrowRight, RefreshCw } from "lucide-react";
-import KmsFailedModal from "./KmsFailedModal";
+
+const KmsFailedModal = dynamic(() => import("./KmsFailedModal"), { ssr: false });
 
 export default function IntegrationStatusCard() {
   const [isSyncing, setIsSyncing] = useState(false);
@@ -132,10 +134,12 @@ export default function IntegrationStatusCard() {
       </div>
 
       {/* KMS Failed Records Modal */}
-      <KmsFailedModal
-        isOpen={isKmsModalOpen}
-        onClose={() => setIsKmsModalOpen(false)}
-      />
+      {isKmsModalOpen && (
+        <KmsFailedModal
+          isOpen={isKmsModalOpen}
+          onClose={() => setIsKmsModalOpen(false)}
+        />
+      )}
     </>
   );
 }

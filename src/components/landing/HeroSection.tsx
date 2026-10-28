@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { slideContentVariants, easeExpo } from "@/lib/animations";
@@ -55,9 +56,13 @@ export default function HeroSection() {
       onMouseLeave={() => setIsCarouselPaused(false)}
       aria-label="Sorotan Utama"
     >
-      <img
+      <Image
         src="/hero-bg.png"
         alt="ASN Kementerian Perhubungan berdiskusi"
+        fill
+        priority
+        sizes="100vw"
+        quality={85}
         className="hero-bg-img"
       />
       <div className="hero-gradient-overlay" aria-hidden="true" />

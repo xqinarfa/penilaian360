@@ -55,7 +55,7 @@ export default function WorkflowSection() {
           className="workflow-header"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           variants={fadeInUp}
         >
           <div className="workflow-title-block">
@@ -78,7 +78,7 @@ export default function WorkflowSection() {
           className="workflow-cards-grid"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.25 }}
+          viewport={{ once: true, amount: 0.25 }}
         >
           {workflowSteps.map((step, i) => {
             const IconComponent = step.Icon;
@@ -128,7 +128,7 @@ export default function WorkflowSection() {
           className="privacy-notice-bar"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ delay: 0.3, duration: 0.5, ease: easeExpo }}
         >
           <ShieldCheck size={22} color="#0878f8" aria-hidden="true" />
