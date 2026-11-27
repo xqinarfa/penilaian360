@@ -55,6 +55,12 @@ services:
       - DB_SSL_MODE=disable
       - REDIS_HOST=evaluasi360-redis
       - REDIS_PORT=6379
+      - MINIO_ENDPOINT=localhost:9000
+      - MINIO_ACCESS_KEY=minioadmin
+      - MINIO_SECRET_KEY=minioadmin
+      - MINIO_USE_SSL=false
+      - MINIO_BUCKET_NAME=evaluasi360-reports
+      - FRONTEND_URL=https://penilaian360.hulunautika.com
       - JWT_SECRET_KEY=kalanara-evaluasi360-jwt-secret-key-production-min32char
     command: ["/bin/sh", "-c", "/app/bin/migrate -dir /app/migrations -cmd up && exec /app/bin/api"]
     networks:
