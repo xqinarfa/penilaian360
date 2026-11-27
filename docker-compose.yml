@@ -1,8 +1,72 @@
 services:
+  evaluasi360-db:
+    image: postgres:16-alpine
+    container_name: evaluasi360-db
+    restart: unless-stopped
+    ports:
+      - "5436:5432"
+    environment:
+      - POSTGRES_USER=evaluasi360_user
+      - POSTGRES_PASSWORD=evaluasi360_secure_pass_2026!
+      - POSTGRES_DB=evaluasi360_db
+    volumes:
+      - evaluasi360_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U evaluasi360_user -d evaluasi360_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - evaluasi360-network
+
+  evaluasi360-redis:
+    image: redis:alpine
+    container_name: evaluasi360-redis
+    restart: unless-stopped
+    networks:
+      - evaluasi360-network
+
+  evaluasi360-backend:
+    build:
+      context: ./Backend-Evaluasi-360
+      dockerfile: Dockerfile
+    image: evaluasi360-backend:latest
+    container_name: evaluasi360-backend
+    restart: unless-stopped
+    depends_on:
+      evaluasi360-db:
+        condition: service_healthy
+      evaluasi360-redis:
+        condition: service_started
+    ports:
+      - "9097:8080"
+    environment:
+      - APP_NAME=evaluasi-360-backend
+      - APP_ENV=production
+      - LOG_LEVEL=info
+      - LOG_FORMAT=json
+      - HTTP_PORT=8080
+      - CORS_ALLOWED_ORIGINS=https://penilaian360.hulunautika.com,http://localhost:3000,http://localhost:8097
+      - DB_HOST=evaluasi360-db
+      - DB_PORT=5432
+      - DB_USER=evaluasi360_user
+      - DB_PASSWORD=evaluasi360_secure_pass_2026!
+      - DB_NAME=evaluasi360_db
+      - DB_SSL_MODE=disable
+      - REDIS_HOST=evaluasi360-redis
+      - REDIS_PORT=6379
+      - JWT_SECRET_KEY=kalanara-evaluasi360-jwt-secret-key-production-min32char
+    command: ["/bin/sh", "-c", "/app/bin/migrate -dir /app/migrations -cmd up && exec /app/bin/api"]
+    networks:
+      - evaluasi360-network
+
   penilaian360-web:
     build:
-      context: .
+      context: ./Frontend-Evaluasi-360
       dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=/api/v1
+        - NEXT_PUBLIC_BASE_URL=https://penilaian360.hulunautika.com
     image: penilaian360-web:latest
     container_name: penilaian360-web
     restart: unless-stopped
@@ -11,3 +75,15 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
+      - NEXT_PUBLIC_API_URL=/api/v1
+      - NEXT_PUBLIC_BASE_URL=https://penilaian360.hulunautika.com
+    networks:
+      - evaluasi360-network
+
+volumes:
+  evaluasi360_pgdata:
+    name: evaluasi360_pgdata
+
+networks:
+  evaluasi360-network:
+    name: evaluasi360-network

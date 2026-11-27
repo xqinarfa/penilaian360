@@ -1,0 +1,13 @@
+services:
+  penilaian360-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: penilaian360-web:latest
+    container_name: penilaian360-web
+    restart: unless-stopped
+    ports:
+      - "8097:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000

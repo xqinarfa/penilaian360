@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS pegawai_relasis;
+DROP TABLE IF EXISTS users;
+
